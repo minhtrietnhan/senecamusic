@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-content>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Register</h2>
+      <mat-error *ngIf="warning">{{ warning }}</mat-error
+      ><br />
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="User Name"
+          name="username"
+          required
+          autofocus
+          [(ngModel)]="registerUser.userName"
+          #username="ngModel"
+        />
+        <mat-error *ngIf="username.errors?.required"
+          >Please provide a valid user name</mat-error
+        > </mat-form-field
+      ><br />
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+          [(ngModel)]="registerUser.password"
+          #password1="ngModel"
+        />
+        <mat-error *ngIf="password1.errors?.required"
+          >Please provide a valid password</mat-error
+        ></mat-form-field
+      ><br />
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          name="password2"
+          required
+          [(ngModel)]="registerUser.password2"
+          #password2="ngModel"
+        />
+        <mat-error *ngIf="password2.errors?.required"
+          >Please provide a valid password</mat-error
+        > </mat-form-field
+      ><br />
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (ngSubmit)="onSubmit()"
+        [disabled]="loading"
+      >
+        <mat-icon *ngIf="!loading">account_circle</mat-icon>
+        <span *ngIf="!loading">&nbsp;&nbsp;&nbsp;Register</span>
+        <mat-icon *ngIf="loading">cached</mat-icon>
+        <span *ngIf="loading">&nbsp;&nbsp;&nbsp;Processing request</span>
+      </button>
+    </form>
+  </mat-card-content>
+  <div class="success" *ngIf="success">
+    Registration Successful. Proceed to<br /><br />
+    <a mat-raised-button color="accent" routerLink="/login">
+      <mat-icon>login</mat-icon>&nbsp;&nbsp;&nbsp;Login
+    </a>
+  </div>
+</mat-card>
+
+{{ registerUser | json }}
+{{ loading | json }}
